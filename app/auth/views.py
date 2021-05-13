@@ -1,13 +1,20 @@
-from . import auth
 from app.models import User
 from .forms import LoginForm
 from flask_login import login_user, logout_user, login_required
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, Blueprint, make_response
+
+auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 
 @auth.route('/', methods=['GET', 'POST'])
 def index():
     return "123456"
+
+
+@auth.route("/wxlogin", methods=['GET', 'POST'])
+def wxlogin():
+    form = LoginForm()
+    return render_template('auth/login.html', form=form)
 
 
 @auth.route('/login', methods=['GET', 'POST'])

@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     fullname = db.Column(db.String(100))
     email = db.Column(db.String(100))
     phone = db.Column(db.String(100))
-    status = db.Column(db.Boolean(default=True))
+    status = db.Column(db.Boolean())
 
     def verify_password(self, raw_password):
         return check_password_hash(self.password,raw_password)
