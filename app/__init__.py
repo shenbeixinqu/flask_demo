@@ -32,6 +32,11 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
 
+    # 如果出现 Missing user_loader or request_loader 添加下面三行
+    @login_manager.user_loader
+    def load_user(user_id):
+        return None
+
     from app.main.views import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
